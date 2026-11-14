@@ -15,3 +15,25 @@ capitals = [
     "Edinburgh is the capital of Scotland."
 ]
 
+
+query = "tell me about the capital of south korea"
+
+doc_embeddings = embeddings.embed_documents(capitals)
+query_embedding = embeddings.embed_query(query)
+
+# in case of cosine similarity whatever we are passing has to be a two d list 
+scores = cosine_similarity([query_embedding], doc_embeddings)[0]
+# it tells the similarity between the red vector query and the five black vectors capitals
+
+index , score = sorted(list(enumerate(scores)), key = lambda x:x[1])[-1]
+# sorting based on the second value
+
+print (capitals[index])
+
+print("similarity score: ", score)
+
+
+
+
+
+
